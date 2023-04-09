@@ -61,6 +61,7 @@ form button {
     font-size:16px;
     padding:10px;
     border-radius:32px;
+    margin-top:20px;
 }
 form button:hover{
     cursor:pointer;
@@ -82,10 +83,6 @@ tr td{
     cursor:pointer;
     background-color:#fb8500;
 }
-/* #btn-up{
-    display:none;
-} */
-
 #submit-error{
     color:red;
     font-size:16px;

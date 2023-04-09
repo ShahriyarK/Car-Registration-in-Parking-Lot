@@ -1,22 +1,19 @@
-// const carMake = document.getElementById('make');
 const alphabets = 'abcdefghijklmnopqrstuvwxyz ';
 const digits = '0123456789-';
 const carMake = document.querySelector('#make');
 const carModel = document.getElementById('model');
 const carRegNum = document.getElementById('registration-no');
 const carColor = document.getElementById('color');
-let inputCollection = document.querySelectorAll('.fields');
+const inputCollection = document.querySelectorAll('.fields');
 const tableRow = document.querySelector('tbody');
 const tableForm = document.querySelector('form');
 const submitButton = document.getElementById('btn');
 const updateSubmissionBtn = document.getElementById('up-btn');
 const updateButton = document.getElementById('btn-up');
+
+
+// For reseting input field values after each submission
 submitButton.addEventListener('mouseup', resetFields);
-
-
-
-
-
 
 function resetFields () {
     inputCollection.forEach((input) => {
@@ -24,8 +21,7 @@ function resetFields () {
     })
 }
 
-
-
+// For validating each input field
  function validateMake () {
     let errorMsg = document.getElementById('make-error');
     if (!containsAlphabet(carMake.value)) {
@@ -40,14 +36,7 @@ function resetFields () {
         errorMsg.innerText = '';
     }
 
-    if (errorMsg.innerText !== '') {
-    submitButton.disabled = true;
-    submitButton.style.backgroundColor = '#7bd4ea';
-    }
-    else{
-    submitButton.disabled = false;
-    submitButton.style.backgroundColor = '#219ebc';
-    }
+    resetButton(errorMsg.innerText);
  }
 
  function validateModel () {
@@ -63,14 +52,7 @@ function resetFields () {
         errorMsg.innerText = '';
     }
 
-    if (errorMsg.innerText !== '') {
-    submitButton.disabled = true;
-    submitButton.style.backgroundColor = '#7bd4ea';
-    }
-    else{
-    submitButton.disabled = false;
-    submitButton.style.backgroundColor = '#219ebc';
-    }
+    resetButton(errorMsg.innerText);
  }
 
  function validateRegNo () {
@@ -89,16 +71,19 @@ function resetFields () {
         errorMsg.innerText = '';
     }
 
-    if (errorMsg.innerText !== '') {
-    submitButton.disabled = true;
-    submitButton.style.backgroundColor = '#7bd4ea';
-    }
-    else{
-    submitButton.disabled = false;
-    submitButton.style.backgroundColor = '#219ebc';
+    resetButton(errorMsg.innerText);
+ }
+// Some helper functions for form validation
+ function resetButton (string) {
+    if (string !== '') {
+        submitButton.disabled = true;
+        submitButton.style.backgroundColor = '#7bd4ea';
+        }
+        else{
+        submitButton.disabled = false;
+        submitButton.style.backgroundColor = '#219ebc';
     }
  }
-
 
  function containsRegNum (string) {
     for (let i = 0; i < string.length; i++) {
@@ -127,27 +112,22 @@ function resetFields () {
     return true;
 }
 
-
-
-
-let array =[1];
+// Events triggered when submit button is clicked.
+let array = [1];
 function addRows() {
-    // console.log(clicked);
     for (let i = 0; i < inputCollection.length; i++) {
         if(inputCollection[i].value === '') {
-            document.getElementById('submit-error').innerText = 'Please fill all fields.';
-            return false;
+            return document.getElementById('submit-error').innerText = 'Please fill all fields.';
+
         }
     }
     document.getElementById('submit-error').innerText = '';
     const newRow = document.createElement('tr');
     tableRow.append(newRow);
-    // console.log(inputCollection[3].value);
     inputCollection.forEach((element) => {
         let data = document.createElement('td');
         data.innerHTML = element.value;
         newRow.append(data);
-        // element.value = '';
     })
     let data = document.createElement('td');
     let button = document.createElement('button')
@@ -191,8 +171,8 @@ function deleteRow (event) {
 }
 
 updateSubmissionBtn.addEventListener('click', () => {
-    let value = addRows();
-    let parent = value[0].parentElement;
+    let elmArray = addRows();
+    let parent = elmArray[0].parentElement;
     let parentRow = parent.parentElement;
     let child =parentRow.children;
     let i = 0;
@@ -210,294 +190,3 @@ updateSubmissionBtn.addEventListener('click', () => {
     submitButton.style.display = 'inline-block';
     updateSubmissionBtn.style.display = 'none';
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// The function below is for mapping the data from array into the table
-// function addRows() {
-// // console.log(clicked);
-//     for (let i = 0; i < inputCollection.length; i++) {
-//         if(inputCollection[i].value === '') {
-//             document.getElementById('submit-error').innerText = 'Please fill all fields.';
-//             return false;
-//         }
-//     }
-
-//     const newRow = document.createElement('tr');
-//     tableRow.append(newRow);
-//     // console.log(inputCollection[3].value);
-//     inputCollection.forEach((element) => {
-//         let data = document.createElement('td');
-//         data.innerHTML = element.value;
-//         newRow.append(data);
-
-//     })
-//     let data = document.createElement('td');
-//     let button = document.createElement('button')
-//     button.setAttribute('class', 'update');
-//     button.setAttribute('type', 'button');
-//     button.innerText = 'Update';
-//     data.append(button);
-//     newRow.append(data);
-
-// let clicked = false;
-//     button.addEventListener('click', () => {
-//         clicked = true;
-//         let parents = button.parentElement;
-//         // console.log(parents);
-//         let grandParent = parents.parentElement;
-//         let child = grandParent.children
-//         let i = 0;
-//         inputCollection.forEach((input) => {
-//             input.value = child[i].innerText;
-//             i++;
-//         })
-//         console.log('1');
-//         submitButton.addEventListener('click', () => {
-//             console.log(clicked);
-//             console.log(child[0].innerText);
-//             let i = 0;
-//             if (clicked === true) {
-
-//                 grandParent.remove();
-//                 // tableRow[tableRow.length-1].remove();
-//                 inputCollection.forEach(element => {
-//                     child[i].innerText = element.value;
-//                     i++;
-//                 })
-//                 clicked = false;
-//             }
-//         })
-//     })
-// }
-
-
-
-
-
-
-
-
-
-// function addRows() {
-//     // console.log(clicked);
-//     for (let i = 0; i < inputCollection.length; i++) {
-//         if(inputCollection[i].value === '') {
-//             document.getElementById('submit-error').innerText = 'Please fill all fields.';
-//             return false;
-//         }
-//     }
-//     document.getElementById('submit-error').innerText = '';
-//     const newRow = document.createElement('tr');
-//     tableRow.append(newRow);
-//     // console.log(inputCollection[3].value);
-//     inputCollection.forEach((element) => {
-//         let data = document.createElement('td');
-//         data.innerHTML = element.value;
-//         newRow.append(data);
-//         element.value = '';
-//     })
-//     let data = document.createElement('td');
-//     let button = document.createElement('button')
-//     button.setAttribute('class', 'update');
-//     button.setAttribute('type', 'button');
-//     button.innerText = 'Update';
-//     data.append(button);
-//     newRow.append(data);
-
-//     button.addEventListener('click', getUpdate);
-
-// }
-
-// function getUpdate (event) {
-
-//     let button = event.target;
-//     console.log(button);
-//     let parents = button.parentElement;
-//     let grandParent = parents.parentElement;
-//     console.log(grandParent);
-//     let child = grandParent.children
-//     let i = 0;
-//     inputCollection.forEach((input) => {
-//         input.value = child[i].innerText;
-//         i++;
-//     })
-//     submitButton.style.display = 'none';
-//     updateSubmissionBtn.style.display = 'inline-block';
-//     updateSubmissionBtn.addEventListener('click', () => {
-//         let i = 0;
-//         console.log(inputCollection[1].value);
-//         inputCollection.forEach(element => {
-//             child[i].innerText = element.value;
-//             element.value = '';
-//             i++;
-//         })
-//         console.log(inputCollection[1].value);
-//         submitButton.style.display = 'inline-block';
-//         updateSubmissionBtn.style.display = 'none';
-//     })
-// }
-// function addUpdate () {
-//     console.log(getUpdate);
-//     // let i = 0;
-//     // console.log(inputCollection[1].value);
-//     // inputCollection.forEach(element => {
-//     //     child[i].innerText = element.value;
-//     //     element.value = '';
-//     //     i++;
-//     // })
-//     // console.log(inputCollection[1].value);
-//     // submitButton.style.display = 'inline-block';
-//     // updateSubmissionBtn.style.display = 'none';
-// }
-// submitButton.addEventListener('click', () => {
-//     console.log(clicked);
-//     console.log(child[0].innerText);
-//     let i = 0;
-//     if (clicked === true) {
-
-//         grandParent.remove();
-//         // tableRow[tableRow.length-1].remove();
-//         inputCollection.forEach(element => {
-//             child[i].innerText = element.value;
-//             i++;
-//         })
-//         clicked = false;
-//     }
-// })
-
-
-
-
-// function addRows() {
-// // console.log(clicked);
-//     for (let i = 0; i < inputCollection.length; i++) {
-//         if(inputCollection[i].value === '') {
-//             document.getElementById('submit-error').innerText = 'Please fill all fields.';
-//             return false;
-//         }
-//     }
-
-//     const newRow = document.createElement('tr');
-//     tableRow.append(newRow);
-//     // console.log(inputCollection[3].value);
-//     inputCollection.forEach((element) => {
-//         let data = document.createElement('td');
-//         data.innerHTML = element.value;
-//         newRow.append(data);
-//         element.value = '';
-//     })
-//     let data = document.createElement('td');
-//     let button = document.createElement('button')
-//     button.setAttribute('class', 'update');
-//     button.setAttribute('type', 'button');
-//     button.innerText = 'Update';
-//     data.append(button);
-//     newRow.append(data);
-
-// let clicked = false;
-//     button.addEventListener('click', () => {
-//         clicked = true;
-//         let parents = button.parentElement;
-//         // console.log(parents);
-//         let grandParent = parents.parentElement;
-//         let child = grandParent.children
-//         let i = 0;
-//         inputCollection.forEach((input) => {
-//             input.value = child[i].innerText;
-//             i++;
-//         })
-//         console.log('1');
-//         submitButton.style.display = 'none';
-//         updateSubmissionBtn.style.display = 'inline-block';
-//         updateSubmissionBtn.addEventListener('click', () => {
-//             console.log(clicked);
-//             console.log(child[0].innerText);
-//             let i = 0;
-//                 // tableRow[tableRow.length-1].remove();
-//                 inputCollection.forEach(element => {
-//                     child[i].innerText = element.value;
-//                     i++;
-//                     element.value = ''
-//                 })
-//                 submitButton.style.display = 'inline-block';
-//             updateSubmissionBtn.style.display = 'none';
-
-//         })
-//     })
-// }
-
-
-
-
-
-
-//----------------Instructions-----------
-// Try onblur event for input field
-// Also try if onsubmit event can work
