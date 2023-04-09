@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Registration</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Car Parking Registration</h1>
+    <form>
+        <div class="input-box">
+            <label for="make">Make</label>
+            <input name="make" id="make" type="text" placeholder="Enter car make" class="fields" oninput="validateMake()">
+        </div>
+        <span id="make-error"></span>
+        <div class="input-box">
+            <label for="model">Model</label>
+            <input id="model" type="text" name="model" placeholder="Enter car model" class="fields" oninput="validateModel()">
+        </div>
+        <span id="model-error"></span>
+        <div class="input-box">
+            <label for="registration-no">Registration No.</label>
+            <input id="registration-no" type="text" name="model" placeholder="Enter car registration no." class="fields" oninput="validateRegNo()">
+        </div>
+        <span id="reg-error"></span>
+        <div class="input-box">
+            <label for="color">Color</label>
+            <select id="color" name="select-color" class="fields">
+                <option value="Red">Red</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Silver">Silver</option>
+                <option value="Green">Green</option>
+                <option value="Brown">Brown</option>
+                <option value="Blue">Blue</option>
+            </select>
+        </div>
+        <button id="btn" type="button" onmousedown="addRows()">Submit Data</button>
+        <button id="up-btn" type="button">Submit Data</button>
+        <p id="submit-error"></p>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="6">Parking Lot Occupancy Data</th>
+            </tr>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Registration No.</th>
+                <th>Color</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
