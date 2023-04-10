@@ -67,6 +67,9 @@ function resetFields () {
     else if (!'0123456789'.includes(carRegNum.value[carRegNum.value.length - 1])) {
         errorMsg.innerText = 'Last character of registration number must be a digit (0-9)';
     }
+    else if (!alphabets.toUpperCase().includes(carRegNum.value[0])) {
+        errorMsg.innerText = 'Registration no. must begin with a letter';
+    }
     else{
         errorMsg.innerText = '';
     }
